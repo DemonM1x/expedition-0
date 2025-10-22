@@ -32,7 +32,7 @@ namespace Expedition0.Tasks
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Trit Xor(this Trit a, Trit b) =>
-            a.And(b).Or(a.Not().And(b.Not()));
+            a.And(b.Not()).Or(a.Not().And(b));
         
         // Common derivatives
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
