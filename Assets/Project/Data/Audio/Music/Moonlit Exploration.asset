@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81a835b03338452c989ed3318c4ffcaa, type: 3}
+  m_Name: Moonlit Exploration
+  m_EditorClassIdentifier: Assembly-CSharp::Expedition0.Audio.MusicTrackAsset
+  intro: {fileID: 8300000, guid: 913ed0b9d5012144cacc268d1fcd253d, type: 3}
+  loop: {fileID: 8300000, guid: 24aac13a7ae8f9942883b98403473869, type: 3}
+  volume: 1
+  displayName: Moonlit Exploration
+  developerDescription: Outer Skeleton (level 2) after meeting Illusion
