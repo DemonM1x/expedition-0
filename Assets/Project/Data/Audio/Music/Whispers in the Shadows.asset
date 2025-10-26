@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81a835b03338452c989ed3318c4ffcaa, type: 3}
+  m_Name: Whispers in the Shadows
+  m_EditorClassIdentifier: Assembly-CSharp::Expedition0.Audio.MusicTrackAsset
+  intro: {fileID: 8300000, guid: d4f61d04a1570f94490196e5b7d84f55, type: 3}
+  loop: {fileID: 8300000, guid: 49215d5d361fd094886608f3486d396f, type: 3}
+  volume: 1
+  displayName: Whispers in the Shadows
+  developerDescription: Worst ending
