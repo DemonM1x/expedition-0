@@ -26,7 +26,7 @@ public class XRControllerInput : MonoBehaviour
         characterController = GetComponent<CharacterController>();
         xrCamera = GetComponentInChildren<Camera>()?.transform;
 
-        // Получаем InputActions из ссылок (новый способ в XRI 3.0)
+        // РџРѕР»СѓС‡Р°РµРј InputActions РёР· СЃСЃС‹Р»РѕРє (РЅРѕРІС‹Р№ СЃРїРѕСЃРѕР± РІ XRI 3.0)
         moveAction = moveActionReference.action;
         jumpAction = jumpActionReference.action;
         descendAction = descendActionReference.action;
@@ -52,7 +52,7 @@ public class XRControllerInput : MonoBehaviour
 
     private void EnableInputActions()
     {
-        // Включаем все Input Actions (обязательно в новой архитектуре)
+        // Р’РєР»СЋС‡Р°РµРј РІСЃРµ Input Actions (РѕР±СЏР·Р°С‚РµР»СЊРЅРѕ РІ РЅРѕРІРѕР№ Р°СЂС…РёС‚РµРєС‚СѓСЂРµ)
         moveAction?.Enable();
         jumpAction?.Enable();
         descendAction?.Enable();
@@ -67,13 +67,13 @@ public class XRControllerInput : MonoBehaviour
 
     private void UpdateMovement()
     {
-        // Сбрасываем velocity каждый кадр для мгновенного старта/остановки
+        // РЎР±СЂР°СЃС‹РІР°РµРј velocity РєР°Р¶РґС‹Р№ РєР°РґСЂ РґР»СЏ РјРіРЅРѕРІРµРЅРЅРѕРіРѕ СЃС‚Р°СЂС‚Р°/РѕСЃС‚Р°РЅРѕРІРєРё
         movementVelocity = Vector3.zero;
 
-        // Обработка горизонтального перемещения с джойстика
+        // РћР±СЂР°Р±РѕС‚РєР° РіРѕСЂРёР·РѕРЅС‚Р°Р»СЊРЅРѕРіРѕ РїРµСЂРµРјРµС‰РµРЅРёСЏ СЃ РґР¶РѕР№СЃС‚РёРєР°
         HandleHorizontalMovement();
 
-        // Обработка вертикального перемещения (прыжок/спуск)
+        // РћР±СЂР°Р±РѕС‚РєР° РІРµСЂС‚РёРєР°Р»СЊРЅРѕРіРѕ РїРµСЂРµРјРµС‰РµРЅРёСЏ (РїСЂС‹Р¶РѕРє/СЃРїСѓСЃРє)
         HandleVerticalMovement();
     }
 
@@ -83,17 +83,17 @@ public class XRControllerInput : MonoBehaviour
 
         if (moveInput.magnitude > 0.1f && xrCamera != null)
         {
-            // Получаем направление относительно взгляда камеры
+            // РџРѕР»СѓС‡Р°РµРј РЅР°РїСЂР°РІР»РµРЅРёРµ РѕС‚РЅРѕСЃРёС‚РµР»СЊРЅРѕ РІР·РіР»СЏРґР° РєР°РјРµСЂС‹
             Vector3 forward = xrCamera.forward;
             Vector3 right = xrCamera.right;
 
-            // Игнорируем вертикальную компоненту для горизонтального движения
+            // РРіРЅРѕСЂРёСЂСѓРµРј РІРµСЂС‚РёРєР°Р»СЊРЅСѓСЋ РєРѕРјРїРѕРЅРµРЅС‚Сѓ РґР»СЏ РіРѕСЂРёР·РѕРЅС‚Р°Р»СЊРЅРѕРіРѕ РґРІРёР¶РµРЅРёСЏ
             forward.y = 0f;
             right.y = 0f;
             forward.Normalize();
             right.Normalize();
 
-            // Рассчитываем направление движения на основе ввода джойстика
+            // Р Р°СЃСЃС‡РёС‚С‹РІР°РµРј РЅР°РїСЂР°РІР»РµРЅРёРµ РґРІРёР¶РµРЅРёСЏ РЅР° РѕСЃРЅРѕРІРµ РІРІРѕРґР° РґР¶РѕР№СЃС‚РёРєР°
             Vector3 horizontalMovement = (forward * moveInput.y + right * moveInput.x) * movementSpeed;
             movementVelocity.x = horizontalMovement.x;
             movementVelocity.z = horizontalMovement.z;
@@ -102,27 +102,27 @@ public class XRControllerInput : MonoBehaviour
 
     private void HandleVerticalMovement()
     {
-        // Читаем значения кнопок (новый способ в XRI 3.0)
+        // Р§РёС‚Р°РµРј Р·РЅР°С‡РµРЅРёСЏ РєРЅРѕРїРѕРє (РЅРѕРІС‹Р№ СЃРїРѕСЃРѕР± РІ XRI 3.0)
         float jumpValue = jumpAction?.ReadValue<float>() ?? 0f;
         float descendValue = descendAction?.ReadValue<float>() ?? 0f;
 
         bool isJumpPressed = jumpValue > 0.1f;
         bool isDescendPressed = descendValue > 0.1f;
 
-        // Механика невесомости: движение только при зажатых кнопках
+        // РњРµС…Р°РЅРёРєР° РЅРµРІРµСЃРѕРјРѕСЃС‚Рё: РґРІРёР¶РµРЅРёРµ С‚РѕР»СЊРєРѕ РїСЂРё Р·Р°Р¶Р°С‚С‹С… РєРЅРѕРїРєР°С…
         if (isJumpPressed && !isDescendPressed)
         {
-            // Движение вверх без гравитации
+            // Р”РІРёР¶РµРЅРёРµ РІРІРµСЂС… Р±РµР· РіСЂР°РІРёС‚Р°С†РёРё
             movementVelocity.y = verticalSpeed;
         }
         else if (isDescendPressed && !isJumpPressed)
         {
-            // Движение вниз без гравитации
+            // Р”РІРёР¶РµРЅРёРµ РІРЅРёР· Р±РµР· РіСЂР°РІРёС‚Р°С†РёРё
             movementVelocity.y = -verticalSpeed;
         }
-        // Если ни одна кнопка не нажата - вертикальное движение отсутствует
+        // Р•СЃР»Рё РЅРё РѕРґРЅР° РєРЅРѕРїРєР° РЅРµ РЅР°Р¶Р°С‚Р° - РІРµСЂС‚РёРєР°Р»СЊРЅРѕРµ РґРІРёР¶РµРЅРёРµ РѕС‚СЃСѓС‚СЃС‚РІСѓРµС‚
 
-        // Если нажаты обе кнопки - приоритет у движения вниз
+        // Р•СЃР»Рё РЅР°Р¶Р°С‚С‹ РѕР±Рµ РєРЅРѕРїРєРё - РїСЂРёРѕСЂРёС‚РµС‚ Сѓ РґРІРёР¶РµРЅРёСЏ РІРЅРёР·
         if (isJumpPressed && isDescendPressed)
         {
             movementVelocity.y = -verticalSpeed;
@@ -131,7 +131,7 @@ public class XRControllerInput : MonoBehaviour
 
     private void ApplyMovement()
     {
-        // Применяем рассчитанную скорость
+        // РџСЂРёРјРµРЅСЏРµРј СЂР°СЃСЃС‡РёС‚Р°РЅРЅСѓСЋ СЃРєРѕСЂРѕСЃС‚СЊ
         characterController.Move(movementVelocity * Time.deltaTime);
     }
 }
