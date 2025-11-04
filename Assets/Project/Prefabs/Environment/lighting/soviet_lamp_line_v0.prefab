@@ -72,6 +72,7 @@ GameObject:
   m_Component:
   - component: {fileID: 316021977100690891}
   - component: {fileID: 5574558702501456770}
+  - component: {fileID: 7530888323253573901}
   m_Layer: 0
   m_Name: soviet_lamp_line_v0
   m_TagString: Untagged
@@ -117,6 +118,23 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.15, y: 0.05, z: 0.75}
   m_Center: {x: 0, y: 0.025, z: 0}
+--- !u!114 &7530888323253573901
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1437738703019784341}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d587f2c0738e7274db7a82568fbabc7f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Expedition0.Throwaway.LampColorController
+  emissionColor: {r: 1, g: 1, b: 1, a: 0}
+  emissionIntensity: 2
+  updateLights: 1
+  lightColor: {r: 1, g: 1, b: 1, a: 1}
+  lightIntensity: 5
 --- !u!1 &2325159908301233631
 GameObject:
   m_ObjectHideFlags: 0
@@ -161,7 +179,7 @@ Light:
   serializedVersion: 11
   m_Type: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 20
+  m_Intensity: 5
   m_Range: 12
   m_SpotAngle: 179
   m_InnerSpotAngle: 60
