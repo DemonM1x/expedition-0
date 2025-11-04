@@ -1,11 +1,11 @@
 ﻿using UnityEngine;
 public enum GameProgress
 {
-    Level0_Tutorial = 4,    // [0] level 0 (tutorial)
-    Level1_Greenhouse = 3,  // [1] level 1 (greenhouse)
-    Level2_OuterSkeleton = 2, // [2] level 2 (outer skeleton)
-    Level3_MachineHall = 1,   // [3] level 3 (machine hall)
-    SeenIllusion = 0         // [4] seen Illusion
+    Level0_Tutorial = 1 << 4, // [0] level 0 (tutorial) → 0b10000 
+    Level1_Greenhouse = 1 << 3, // [1] level 1 (greenhouse) → 0b01000
+    Level2_OuterSkeleton = 1 << 2, // [2] level 2 (outer skeleton) → 0b00100
+    Level3_MachineHall = 1 << 1, // [3] level 3 (machine hall) → 0b00010
+    SeenIllusion = 1 << 0  // [4] seen Illusion → 0b00001 
 }
 
 public static class SaveManager
@@ -20,9 +20,9 @@ public static class SaveManager
     public static void SetCompleted(GameProgress progress)
     {
         int currentSave = PlayerPrefs.GetInt(SAVE_KEY, 0);
-        currentSave |= (1 << (int)progress); // Устанавливаем бит
+        currentSave |= (int)progress;
         PlayerPrefs.SetInt(SAVE_KEY, currentSave);
-        PlayerPrefs.Save(); // Сохраняем немедленно
+        PlayerPrefs.Save(); 
     }
 
     /// <summary>
@@ -43,7 +43,7 @@ public static class SaveManager
     public static bool IsCompleted(GameProgress progress)
     {
         int saveData = LoadSave();
-        return (saveData & (1 << (int)progress)) != 0;
+        return (saveData & (int)progress) != 0;
     }
 
     /// <summary>
@@ -73,4 +73,7 @@ public static class SaveManager
         int saveData = LoadSave();
         return "0b" + System.Convert.ToString(saveData, 2).PadLeft(5, '0');
     }
+
+    //Загрузка как enum (удобно для комбинаций)
+    public static GameProgress LoadProgress() => (GameProgress)LoadSave();
 }
