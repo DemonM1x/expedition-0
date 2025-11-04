@@ -359,7 +359,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5401211369573195591}
   m_Layer: 0
-  m_Name: "bridge_\u0441orridor_v0"
+  m_Name: bridge_corridor_v0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
