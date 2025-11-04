@@ -1,4 +1,7 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
+
+[Flags]
 public enum GameProgress
 {
     Level0_Tutorial = 1 << 4, // [0] level 0 (tutorial) → 0b10000 
