@@ -13,39 +13,35 @@ public class AudioSettingsManager : MonoBehaviour
     public string voiceVolumeParam = "VoiceVolume";
     public string sfxVolumeParam = "SFXVolume";
     
-    [Header("Volume Step")]
-    [Range(5, 20)]
-    public float volumeStep = 15f; 
+    // [Header("Volume Step")]
+    // [Range(5, 20)]
+    // public float volumeStep = 15f; 
     
-    [Header("UI Elements - Buttons and TextMeshPro")]
-    public Button masterPlusBtn;
-    public Button masterMinusBtn;
+    [Header("UI Elements - Text Labels")]
     public TMP_Text masterVolumeText; 
-    
-    public Button musicPlusBtn;
-    public Button musicMinusBtn;
     public TMP_Text musicVolumeText; 
-    public Button voicePlusBtn;
-    public Button voiceMinusBtn;
     public TMP_Text voiceVolumeText; 
-    public Button sfxPlusBtn;
-    public Button sfxMinusBtn;
-    public TMP_Text sfxVolumeText; 
-    [Header("Current Volume Values")]
+    public TMP_Text sfxVolumeText;
+
+    [Header("Volume Values")]
+    private const float DefaultMasterVolume = 80f;
+    private const float DefaultMusicVolume = 70f;
+    private const float DefaultVoiceVolume = 90f;
+    private const float DefaultSfxVolume = 80f;
+    
     [Range(0, 100)]
-    private float masterVolume = 80f;
+    private float masterVolume = DefaultMasterVolume;
     [Range(0, 100)]
-    private float musicVolume = 70f;
+    private float musicVolume = DefaultMusicVolume;
     [Range(0, 100)]
-    private float voiceVolume = 90f;
+    private float voiceVolume = DefaultVoiceVolume;
     [Range(0, 100)]
-    private float sfxVolume = 80f;
+    private float sfxVolume = DefaultSfxVolume;
 
     private void Start()
     {
         FindTextMeshProElements();
         LoadVolumeSettings();
-        SetupButtonListeners();
         ApplyAllVolumes();
         UpdateAllVolumeTexts();
     }
@@ -81,33 +77,6 @@ public class AudioSettingsManager : MonoBehaviour
         }
     }
 
-    private void SetupButtonListeners()
-    {
-        if (masterPlusBtn != null)
-            masterPlusBtn.onClick.AddListener(() => ChangeMasterVolume(volumeStep));
-        
-        if (masterMinusBtn != null)
-            masterMinusBtn.onClick.AddListener(() => ChangeMasterVolume(-volumeStep));
-
-        if (musicPlusBtn != null)
-            musicPlusBtn.onClick.AddListener(() => ChangeMusicVolume(volumeStep));
-        
-        if (musicMinusBtn != null)
-            musicMinusBtn.onClick.AddListener(() => ChangeMusicVolume(-volumeStep));
-
-        if (voicePlusBtn != null)
-            voicePlusBtn.onClick.AddListener(() => ChangeVoiceVolume(volumeStep));
-        
-        if (voiceMinusBtn != null)
-            voiceMinusBtn.onClick.AddListener(() => ChangeVoiceVolume(-volumeStep));
-
-        if (sfxPlusBtn != null)
-            sfxPlusBtn.onClick.AddListener(() => ChangeSFXVolume(volumeStep));
-        
-        if (sfxMinusBtn != null)
-            sfxMinusBtn.onClick.AddListener(() => ChangeSFXVolume(-volumeStep));
-    }
-
     public void ChangeMasterVolume(float changeAmount)
     {
         masterVolume = Mathf.Clamp(masterVolume + changeAmount, 0f, 100f);
@@ -135,10 +104,10 @@ public class AudioSettingsManager : MonoBehaviour
         Debug.Log($"Voice Volume: {voiceVolume}%");
     }
 
-    public void ChangeSFXVolume(float changeAmount)
+    public void ChangeSfxVolume(float changeAmount)
     {
         sfxVolume = Mathf.Clamp(sfxVolume + changeAmount, 0f, 100f);
-        SetSFXVolume(sfxVolume / 100f);
+        SetSfxVolume(sfxVolume / 100f);
         SaveVolumeSetting(sfxVolumeParam, sfxVolume / 100f);
         UpdateVolumeText(sfxVolumeText, sfxVolume);
         Debug.Log($"SFX Volume: {sfxVolume}%");
@@ -159,7 +128,7 @@ public class AudioSettingsManager : MonoBehaviour
         SetVolume(voiceVolumeParam, volume);
     }
 
-    public void SetSFXVolume(float volume)
+    public void SetSfxVolume(float volume)
     {
         SetVolume(sfxVolumeParam, volume);
     }
@@ -197,10 +166,10 @@ public class AudioSettingsManager : MonoBehaviour
 
     private void LoadVolumeSettings()
     {
-        masterVolume = PlayerPrefs.GetFloat(masterVolumeParam, 0.8f) * 100f;
-        musicVolume = PlayerPrefs.GetFloat(musicVolumeParam, 0.7f) * 100f;
-        voiceVolume = PlayerPrefs.GetFloat(voiceVolumeParam, 0.9f) * 100f;
-        sfxVolume = PlayerPrefs.GetFloat(sfxVolumeParam, 0.8f) * 100f;
+        masterVolume = PlayerPrefs.GetFloat(masterVolumeParam, DefaultMasterVolume / 100f) * 100f;
+        musicVolume = PlayerPrefs.GetFloat(musicVolumeParam, DefaultMusicVolume / 100f) * 100f;
+        voiceVolume = PlayerPrefs.GetFloat(voiceVolumeParam, DefaultVoiceVolume / 100f) * 100f;
+        sfxVolume = PlayerPrefs.GetFloat(sfxVolumeParam, DefaultSfxVolume / 100f) * 100f;
     }
 
     private void ApplyAllVolumes()
@@ -208,15 +177,15 @@ public class AudioSettingsManager : MonoBehaviour
         SetMasterVolume(masterVolume / 100f);
         SetMusicVolume(musicVolume / 100f);
         SetVoiceVolume(voiceVolume / 100f);
-        SetSFXVolume(sfxVolume / 100f);
+        SetSfxVolume(sfxVolume / 100f);
     }
 
     public void ResetToDefaults()
     {
-        masterVolume = 80f;
-        musicVolume = 70f;
-        voiceVolume = 90f;
-        sfxVolume = 80f;
+        masterVolume = DefaultMasterVolume;
+        musicVolume = DefaultMusicVolume;
+        voiceVolume = DefaultVoiceVolume;
+        sfxVolume = DefaultSfxVolume;
 
         ApplyAllVolumes();
         UpdateAllVolumeTexts();
@@ -241,9 +210,6 @@ public class AudioSettingsManager : MonoBehaviour
     [ContextMenu("Print Current Volumes")]
     public void PrintCurrentVolumes()
     {
-        Debug.Log($"Master: {masterVolume}%");
-        Debug.Log($"Music: {musicVolume}%");
-        Debug.Log($"Voice: {voiceVolume}%");
-        Debug.Log($"SFX: {sfxVolume}%");
+        Debug.Log($"Master: {masterVolume}%, Music: {musicVolume}, Voice: {voiceVolume}, SFX: {sfxVolume}");
     }
 }

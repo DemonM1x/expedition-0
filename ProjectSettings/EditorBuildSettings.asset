@@ -8,6 +8,15 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/SampleScene.unity
     guid: 99c9720ab356a0642a771bea13969a05
+  - enabled: 1
+    path: Assets/Project/Scenes/UI/Settings.unity
+    guid: 17976b9626d321148b257422f43ebf36
+  - enabled: 1
+    path: Assets/Project/Scenes/UI/StartGame.unity
+    guid: 03caea7b54bec1347b11db7de738061a
+  - enabled: 1
+    path: Assets/Project/Scenes/Levels/Space Greenhouse.unity
+    guid: ecbef658680883a4fa3fd962ad9542b8
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 6a0b2272b4be84443921c2529a9964c3, type: 2}
