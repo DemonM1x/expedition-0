@@ -15,6 +15,9 @@ EditorBuildSettings:
     path: Assets/Project/Scenes/UI/StartGame.unity
     guid: 03caea7b54bec1347b11db7de738061a
   - enabled: 1
+    path: Assets/Project/Scenes/Levels/Bridge Corridor.unity
+    guid: afc105953ceb57c4a936ebb6de65faa3
+  - enabled: 1
     path: Assets/Project/Scenes/Levels/Space Greenhouse.unity
     guid: ecbef658680883a4fa3fd962ad9542b8
   m_configObjects:
