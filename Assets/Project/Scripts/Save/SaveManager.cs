@@ -1,4 +1,5 @@
 ﻿using System;
+using Expedition0.Util;
 using UnityEngine;
 
 [Flags]
@@ -8,12 +9,16 @@ public enum GameProgress
     Level1_Greenhouse = 1 << 3, // [1] level 1 (greenhouse) → 0b01000
     Level2_OuterSkeleton = 1 << 2, // [2] level 2 (outer skeleton) → 0b00100
     Level3_MachineHall = 1 << 1, // [3] level 3 (machine hall) → 0b00010
-    SeenIllusion = 1 << 0  // [4] seen Illusion → 0b00001 
+    SeenIllusion = 1 << 0,  // [4] seen Illusion → 0b00001
+    // Комбинации флагов (вспомогательные)
+    MainLevels = Level1_Greenhouse | Level2_OuterSkeleton | Level3_MachineHall, // 0b01110
+    All = Level0_Tutorial | MainLevels | SeenIllusion //  0b11111
 }
 
 public static class SaveManager
 {
     private const string SAVE_KEY = "GameProgressBits"; // Ключ для PlayerPrefs
+    private const int IllusionThreshold = 2; // Количество пройденных уровней, прежде чем нужно встретить Иллюзию
 
     /// <summary>
     /// Сохраняет прогресс: отмечает, что пользователь прошел указанный уровень/флаг.
@@ -79,4 +84,41 @@ public static class SaveManager
 
     //Загрузка как enum (удобно для комбинаций)
     public static GameProgress LoadProgress() => (GameProgress)LoadSave();
+    
+    /// <summary>
+    /// Подсчитывает количество пройденных основных уровней в сохранении.
+    /// </summary>
+    /// <param name="saveData">Текущее сохранение</param>
+    /// <returns>Количество пройденных уровней</returns>
+    public static int MainLevelsCompletedCount(int saveData)
+    {
+        return BitUtils.CountOnes(saveData & (int)GameProgress.MainLevels);
+    }
+
+    /// <summary>
+    /// Проверяет, не наблюдается ли в сохранении следующих условий:
+    /// - пройдены любые сюжетные уровни, но не пройден туториал;
+    /// - пройдены все сюжетные уровни, но не встречена Иллюзия.
+    ///
+    /// Может быть использовано для реализации простого античита.
+    /// </summary>
+    /// <param name="saveData">Текущее сохранение</param>
+    /// <returns>Является ли сохранение запрещённой комбинацией</returns>
+    public static bool IsForbiddenCombination(int saveData)
+    {
+        bool cond1 = ((saveData & (int)GameProgress.Level0_Tutorial) == 0) &&
+                     ((saveData & (int)GameProgress.MainLevels) != 0);
+        bool cond2 = ((saveData & (int)GameProgress.MainLevels) == (int)GameProgress.MainLevels) &&
+                     ((saveData & (int)GameProgress.SeenIllusion) == 0);
+        return cond1 || cond2;
+    }
+
+    /// <summary>
+    /// Проверяет наличие усложнённого режима (зависит от числа пройденных уровней).
+    /// В данный момент влияет на музыку в лобби и на уровнях.
+    /// </summary>
+    /// <param name="saveData">Текущее сохранение</param>
+    /// <returns>Включён ли усложнённый режим</returns>
+    public static bool EncoreModeEnabled(int saveData) =>
+        MainLevelsCompletedCount(saveData) >= IllusionThreshold;
 }
