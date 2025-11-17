@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bfd3c841fa064ae9a750f1d8244ee9c6, type: 3}
   m_Name: Voice_Hyperion_04
   m_EditorClassIdentifier: Assembly-CSharp::Expedition0.Audio.VoiceTrackAsset
-  voiceAudio: {fileID: 8300000, guid: 0aeb3389be3c40444a48c6fa4ec9220a, type: 3}
+  voiceAudio: {fileID: 8300000, guid: 79ab26f77a98e1f4a93db95d5ca13099, type: 3}
   volume: 1
   pitch: 1
   interruptible: 1

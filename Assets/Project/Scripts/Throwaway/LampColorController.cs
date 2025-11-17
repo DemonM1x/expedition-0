@@ -81,6 +81,7 @@ namespace Expedition0.Throwaway
             foreach (var renderer in _renderers)
             {
                 if (renderer == null) continue;
+                if (_propBlock == null) _propBlock = new MaterialPropertyBlock();
                 
                 renderer.GetPropertyBlock(_propBlock);
                 _propBlock.SetColor("_EmissionColor", finalColor);
