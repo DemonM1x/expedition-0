@@ -1,5 +1,5 @@
 using UnityEngine;
-using TMPro;
+using UnityEngine.UI;
 
 namespace Expedition0.Tasks
 {
@@ -10,12 +10,24 @@ namespace Expedition0.Tasks
         public GameObject[] valueSlots;
         public GameObject[] operatorSlots;
 
-        [Header("Optional direct TMP mapping (bypass *View)")]
-        public TMP_Text[] valueLabels;
-        public TMP_Text[] operatorLabels;
+        [Header("Optional direct Image mapping (bypass *View)")]
+        public Image[] valueImages;
+        public Image[] operatorImages;
+
+        [Header("Digit Sprites")]
+        public Sprite digit0Sprite;
+        public Sprite digit1Sprite;
+        public Sprite digit2Sprite;
+
+        [Header("Operator Sprites")]
+        public Sprite notSprite;
+        public Sprite andSprite;
+        public Sprite orSprite;
+        public Sprite xorSprite;
+        public Sprite implySprite;
 
         [Header("Answer (right side)")]
-        public TMP_Text answerLabel;
+        public Image answerImage;
 
         public void Bind(ASTTemplate template)
         { 
@@ -32,10 +44,9 @@ namespace Expedition0.Tasks
                     if (view != null) view.BindNode(slotNode);
                 }
 
-                if (valueLabels != null && i < valueLabels.Length && valueLabels[i] != null)
+                if (valueImages != null && i < valueImages.Length && valueImages[i] != null)
                 {
-                    var label = valueLabels[i];
-                    label.text = slotNode.CurrentValue.HasValue ? ((int)slotNode.CurrentValue.Value).ToString() : string.Empty;
+                    ApplyDigitImage(valueImages[i], slotNode.CurrentValue);
                 }
             }
 
@@ -53,30 +64,70 @@ namespace Expedition0.Tasks
                         view.ApplyOperator(slotNode.CurrentOperator.Value, slotNode.IsLocked);
                 }
 
-                if (operatorLabels != null && i < operatorLabels.Length && operatorLabels[i] != null)
+                if (operatorImages != null && i < operatorImages.Length && operatorImages[i] != null)
                 {
-                    var label = operatorLabels[i];
-                    label.text = slotNode.CurrentOperator.HasValue ? OperatorToText(slotNode.CurrentOperator.Value) : string.Empty;
+                    ApplyOperatorImage(operatorImages[i], slotNode.CurrentOperator);
                 }
             }
 
             // Ответ (правая часть)
-            if (answerLabel != null)
+            if (answerImage != null)
             {
-                answerLabel.text = ((int)template.Answer).ToString();
+                ApplyDigitImage(answerImage, template.Answer);
             }
         }
 
-        private string OperatorToText(Operator op)
+        private void ApplyDigitImage(Image image, Trit? value)
+        {
+            if (image == null) return;
+
+            if (!value.HasValue)
+            {
+                image.sprite = null;
+                image.enabled = false;
+                return;
+            }
+
+            image.sprite = GetDigitSprite(value.Value);
+            image.enabled = image.sprite != null;
+        }
+
+        private void ApplyOperatorImage(Image image, Operator? op)
+        {
+            if (image == null) return;
+
+            if (!op.HasValue)
+            {
+                image.sprite = null;
+                image.enabled = false;
+                return;
+            }
+
+            image.sprite = GetOperatorSprite(op.Value);
+            image.enabled = image.sprite != null;
+        }
+
+        private Sprite GetDigitSprite(Trit value)
+        {
+            switch (value.ToInt())
+            {
+                case 0: return digit0Sprite;
+                case 1: return digit1Sprite;
+                case 2: return digit2Sprite;
+                default: return null;
+            }
+        }
+
+        private Sprite GetOperatorSprite(Operator op)
         {
             switch (op)
             {
-                case Operator.NOT: return "NOT";
-                case Operator.AND: return "AND";
-                case Operator.OR: return "OR";
-                case Operator.XOR: return "XOR";
-                case Operator.IMPLY: return "IMPLY";
-                default: return string.Empty;
+                case Operator.NOT: return notSprite;
+                case Operator.AND: return andSprite;
+                case Operator.OR: return orSprite;
+                case Operator.XOR: return xorSprite;
+                case Operator.IMPLY: return implySprite;
+                default: return null;
             }
         }
     }
