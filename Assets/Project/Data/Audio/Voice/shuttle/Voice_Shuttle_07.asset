@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bfd3c841fa064ae9a750f1d8244ee9c6, type: 3}
+  m_Name: Voice_Shuttle_07
+  m_EditorClassIdentifier: Assembly-CSharp::Expedition0.Audio.VoiceTrackAsset
+  voiceAudio: {fileID: 8300000, guid: 4c68e6b14a3bcef48987d2b7f3912798, type: 3}
+  volume: 1
+  pitch: 1
+  interruptible: 1
+  preDelay: 0
+  character: {fileID: 11400000, guid: 3b1b75bec4712e34ba3323f5499c15b1, type: 2}
+  text: "\u041D\u0430\u0447\u0438\u043D\u0430\u044E \u0440\u0430\u0441\u0448\u0438\u0444\u0440\u043E\u0432\u043A\u0443
+    \u043F\u0435\u0440\u0435\u0434\u0430\u0447\u0438 \u043E\u0442 \u0413\u0438\u043F\u0435\u0440\u0438\u043E\u043D\u0430."

@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Expedition0.Audio
 {
-    [CreateAssetMenu(fileName = "MusicTrack", menuName = "Audio/Music Track")]
+    [CreateAssetMenu(fileName = "MusicTrack", menuName = "Audio/Music Track Data")]
     public class MusicTrackAsset : ScriptableObject
     {
         [Header("Playback Clips")]
