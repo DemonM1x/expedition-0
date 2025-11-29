@@ -10,6 +10,8 @@ namespace Expedition0.Tasks
         // Временный переключатель: использовать пример 1 OR X = 2
         public bool useNeutralOrXEqualsTrue = true;
 
+        public ASTTemplate template;
+
         private void Start()
         {
             if (binder == null)
@@ -18,7 +20,6 @@ namespace Expedition0.Tasks
             }
             if (binder == null) return;
 
-            ASTTemplate template;
             if (useNeutralOrXEqualsTrue)
             {
                 template = Create1TypeTasks.CreateNeutralOrXEqualsTrue();
@@ -36,6 +37,18 @@ namespace Expedition0.Tasks
             }
 
             binder.Bind(template);
+        }
+
+        // Публичный метод для получения template
+        public ASTTemplate GetTemplate()
+        {
+            return template;
+        }
+
+        // Публичный метод для получения корневого узла AST
+        public ASTNode GetRootNode()
+        {
+            return template?.Root;
         }
     }
 }

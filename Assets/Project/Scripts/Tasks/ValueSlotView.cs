@@ -31,8 +31,22 @@ namespace Expedition0.Tasks
             if (xrInteractable != null)
             {
                 xrInteractable.selectEntered.AddListener(OnInteractableSelected);
-                Debug.Log("XR Select listener added");
+                xrInteractable.selectExited.AddListener(OnSelectExited);
+                xrInteractable.activated.AddListener(OnActivated);
+                xrInteractable.hoverEntered.AddListener(OnHoverEntered);
+                xrInteractable.hoverExited.AddListener(OnHoverExited);
+                Debug.Log("XR listeners added");
             }
+        }
+
+        private void OnHoverEntered(HoverEnterEventArgs args)
+        {
+            Debug.Log($"XR Hover ENTERED by: {args.interactorObject.transform.name}");
+        }
+
+        private void OnHoverExited(HoverExitEventArgs args)
+        {
+            Debug.Log($"XR Hover EXITED by: {args.interactorObject.transform.name}");
         }
 
         // Добавляем поддержку обычного клика мышью для тестирования
@@ -52,7 +66,19 @@ namespace Expedition0.Tasks
 
         private void OnInteractableSelected(SelectEnterEventArgs args)
         {
+            Debug.Log($"XR SELECT ENTERED by: {args.interactorObject.transform.name}");
             OnClick();
+        }
+
+        private void OnSelectExited(SelectExitEventArgs args)
+        {
+            Debug.Log($"XR SELECT EXITED by: {args.interactorObject.transform.name}");
+        }
+
+        private void OnActivated(ActivateEventArgs args)
+        {
+            Debug.Log($"XR ACTIVATED by: {args.interactorObject.transform.name}");
+            OnClick(); // Альтернативный способ взаимодействия
         }
 
         public void OnClick()
