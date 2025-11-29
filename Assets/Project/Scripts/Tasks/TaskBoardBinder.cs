@@ -60,8 +60,11 @@ namespace Expedition0.Tasks
                 if (go != null)
                 {
                     var view = go.GetComponentInChildren<OperatorSlotView>();
-                    if (view != null && slotNode.CurrentOperator.HasValue)
-                        view.ApplyOperator(slotNode.CurrentOperator.Value, slotNode.IsLocked);
+                    if (view != null)
+                    {
+                        view.BindNode(slotNode); // Правильная привязка узла!
+                        Debug.Log($"TaskBoardBinder: Bound OperatorSlotView {i} to AST node with operator {slotNode.CurrentOperator}");
+                    }
                 }
 
                 if (operatorImages != null && i < operatorImages.Length && operatorImages[i] != null)

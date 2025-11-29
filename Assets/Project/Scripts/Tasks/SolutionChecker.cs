@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.XR.Interaction.Toolkit;
 using Expedition0.Util;
 
@@ -27,6 +28,12 @@ namespace Expedition0.Tasks
         
         [Header("Error Counter")]
         [SerializeField] private int errorCount = 0;
+        [SerializeField] private int nthErrorTrigger = 3; // Каждый n-ый неправильный ответ
+        
+        [Header("Solution Events")]
+        [SerializeField] private UnityEvent onCorrectSolution;
+        [SerializeField] private UnityEvent onIncorrectSolution;
+        [SerializeField] private UnityEvent onNthIncorrectSolution;
         
         private UnityEngine.XR.Interaction.Toolkit.Interactables.XRSimpleInteractable xrInteractable;
 
@@ -101,6 +108,7 @@ namespace Expedition0.Tasks
                 {
                     Debug.Log("SolutionChecker: Solution is CORRECT!");
                     ApplyCorrectMaterial();
+                    onCorrectSolution?.Invoke();
                 }
                 else
                 {
@@ -108,6 +116,16 @@ namespace Expedition0.Tasks
                     errorCount++;
                     Debug.Log($"SolutionChecker: Error count increased to {errorCount}");
                     ApplyIncorrectMaterial();
+                    
+                    // Вызываем событие неправильного ответа
+                    onIncorrectSolution?.Invoke();
+                    
+                    // Проверяем, нужно ли вызвать событие n-го неправильного ответа
+                    if (errorCount % nthErrorTrigger == 0)
+                    {
+                        Debug.Log($"SolutionChecker: Triggering nth incorrect solution event (error #{errorCount})");
+                        onNthIncorrectSolution?.Invoke();
+                    }
                 }
             }
             catch (System.Exception e)
@@ -115,6 +133,15 @@ namespace Expedition0.Tasks
                 Debug.LogError($"SolutionChecker: Error evaluating solution: {e.Message}");
                 errorCount++;
                 ApplyIncorrectMaterial();
+                
+                // Вызываем события при ошибке вычисления
+                onIncorrectSolution?.Invoke();
+                
+                if (errorCount % nthErrorTrigger == 0)
+                {
+                    Debug.Log($"SolutionChecker: Triggering nth incorrect solution event (error #{errorCount})");
+                    onNthIncorrectSolution?.Invoke();
+                }
             }
         }
 
