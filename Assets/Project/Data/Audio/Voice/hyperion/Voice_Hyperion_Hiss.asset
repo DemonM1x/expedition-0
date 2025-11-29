@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bfd3c841fa064ae9a750f1d8244ee9c6, type: 3}
+  m_Name: Voice_Hyperion_Hiss
+  m_EditorClassIdentifier: Assembly-CSharp::Expedition0.Audio.VoiceTrackAsset
+  voiceAudio: {fileID: 8300000, guid: b7b16a950797a724aa7c3697b6858cc0, type: 3}
+  volume: 1
+  pitch: 1
+  interruptible: 1
+  preDelay: 0
+  character: {fileID: 11400000, guid: adc4596b5bf52624bba37d3334918959, type: 2}
+  text: "*\u0437\u043B\u043E\u0431\u043D\u043E\u0435 \u0448\u0438\u043F\u0435\u043D\u0438\u0435*"

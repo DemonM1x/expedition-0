@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bfd3c841fa064ae9a750f1d8244ee9c6, type: 3}
+  m_Name: Voice_General_01
+  m_EditorClassIdentifier: Assembly-CSharp::Expedition0.Audio.VoiceTrackAsset
+  voiceAudio: {fileID: 8300000, guid: cb1e3ce97597eff428458c429ceec48b, type: 3}
+  volume: 1
+  pitch: 1
+  interruptible: 1
+  preDelay: 0
+  character: {fileID: 11400000, guid: c20fb48a538e04748ab595460edac4c9, type: 2}
+  text: "\u0423 \u043D\u0430\u0441 \u0442\u0430 \u0436\u0435 \u043F\u0440\u043E\u0431\u043B\u0435\u043C\u0430,
+    \u0421\u043C\u0438\u0440\u043D\u043E\u0432. \u0423\u0436\u0435 \u0447\u0430\u0441
+    \u0441\u043E \u0441\u0442\u0430\u043D\u0446\u0438\u0438  \xAB\u041F\u0443\u043B\u044C\u0441\u0430\u0440\xBB
+    \u043D\u0435\u0442 \u0441\u0438\u0433\u043D\u0430\u043B\u043E\u0432."
