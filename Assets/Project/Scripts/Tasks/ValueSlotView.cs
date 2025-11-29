@@ -96,7 +96,14 @@ namespace Expedition0.Tasks
 
         public void BindNode(ValueSlotNode node)
         {
+            if (node == null)
+            {
+                Debug.LogError("ValueSlotView: Trying to bind null node!");
+                return;
+            }
+            
             boundNode = node;
+            Debug.Log($"ValueSlotView: Successfully bound to AST node with value {node.CurrentValue}, locked: {node.IsLocked}");
             ApplyValue(node.CurrentValue, node.IsLocked);
         }
 
@@ -110,8 +117,14 @@ namespace Expedition0.Tasks
 
         private void CycleValue()
         {
-            Debug.Log("pressed");
-            if (IsLocked) return;
+            Debug.Log("ValueSlotView: Cycling value");
+            if (IsLocked) 
+            {
+                Debug.Log("ValueSlotView: Cannot cycle - value is locked");
+                return;
+            }
+
+            Trit? previousValue = CurrentValue;
 
             if (!CurrentValue.HasValue)
             {
@@ -124,9 +137,29 @@ namespace Expedition0.Tasks
                 CurrentValue = TritLogic.FromInt(nextInt);
             }
 
+            Debug.Log($"ValueSlotView: Changed value from {previousValue} to {CurrentValue}");
+
+            // Обновляем AST узел
             if (boundNode != null && CurrentValue.HasValue)
             {
-                boundNode.SetValue(CurrentValue.Value);
+                try
+                {
+                    boundNode.SetValue(CurrentValue.Value);
+                    Debug.Log($"ValueSlotView: Successfully updated AST node with value {CurrentValue.Value}");
+                }
+                catch (System.Exception e)
+                {
+                    Debug.LogError($"ValueSlotView: Failed to update AST node: {e.Message}");
+                    // Возвращаем предыдущее значение при ошибке
+                    CurrentValue = previousValue;
+                }
+            }
+            else
+            {
+                if (boundNode == null)
+                    Debug.LogWarning("ValueSlotView: boundNode is null - AST not updated!");
+                if (!CurrentValue.HasValue)
+                    Debug.LogWarning("ValueSlotView: CurrentValue is null - AST not updated!");
             }
 
             UpdateLabel();
@@ -169,6 +202,74 @@ namespace Expedition0.Tasks
         private void UpdateInteractable()
         {
             if (interactableCollider != null) interactableCollider.enabled = !IsLocked;
+        }
+
+        /// <summary>
+        /// Проверяет синхронизацию между UI и AST узлом
+        /// </summary>
+        public bool IsInSync()
+        {
+            if (boundNode == null) return false;
+            return CurrentValue == boundNode.CurrentValue && IsLocked == boundNode.IsLocked;
+        }
+
+        /// <summary>
+        /// Принудительно синхронизирует UI с AST узлом
+        /// </summary>
+        public void SyncWithAST()
+        {
+            if (boundNode != null)
+            {
+                ApplyValue(boundNode.CurrentValue, boundNode.IsLocked);
+                Debug.Log($"ValueSlotView: Synced with AST - Value: {boundNode.CurrentValue}, Locked: {boundNode.IsLocked}");
+            }
+        }
+
+        // Методы для тестирования в инспекторе
+        [ContextMenu("Test Cycle Value")]
+        public void TestCycleValue()
+        {
+            CycleValue();
+        }
+
+        [ContextMenu("Test Set False")]
+        public void TestSetFalse()
+        {
+            ApplyValue(Trit.False, false);
+        }
+
+        [ContextMenu("Test Set Neutral")]
+        public void TestSetNeutral()
+        {
+            ApplyValue(Trit.Neutral, false);
+        }
+
+        [ContextMenu("Test Set True")]
+        public void TestSetTrue()
+        {
+            ApplyValue(Trit.True, false);
+        }
+
+        [ContextMenu("Check AST Sync")]
+        public void TestCheckSync()
+        {
+            bool inSync = IsInSync();
+            Debug.Log($"ValueSlotView: AST Sync Status: {inSync}");
+            if (boundNode != null)
+            {
+                Debug.Log($"  UI: Value={CurrentValue}, Locked={IsLocked}");
+                Debug.Log($"  AST: Value={boundNode.CurrentValue}, Locked={boundNode.IsLocked}");
+            }
+            else
+            {
+                Debug.Log("  boundNode is null!");
+            }
+        }
+
+        [ContextMenu("Force Sync with AST")]
+        public void TestSyncWithAST()
+        {
+            SyncWithAST();
         }
     }
 }
