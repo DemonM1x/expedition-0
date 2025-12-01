@@ -21,7 +21,7 @@ namespace Expedition0.Audio
         [SerializeField] private List<ConditionalTrack> conditionalTracks;
         [SerializeField] private MusicTrackAsset defaultTrack;
 
-        private MusicTrackAsset _last;
+        private static MusicTrackAsset _last;
 
         private void Start()
         {
@@ -45,11 +45,28 @@ namespace Expedition0.Audio
             SetMusicTrack(best);
         }
 
-        private void SetMusicTrack(MusicTrackAsset trackAsset)
+        public void SetMusicTrack(MusicTrackAsset trackAsset)
         {
-            if (_last == trackAsset) return;              // avoid needless restarts
+            if (_last == trackAsset) {
+                Debug.Log($"Track '{trackAsset.displayName}' is already playing, no need to change", this);
+                return;              // avoid needless restarts
+            }
             _last = trackAsset;
+            Debug.Log($"Set new music track: '{trackAsset.displayName}'", this);
             if (MusicPlayer.Instance) MusicPlayer.Instance.Play(trackAsset);
         }
+
+        public void FadeOutMusic()
+        {
+            if (MusicPlayer.Instance) MusicPlayer.Instance.FadeOutWithPause();
+        }
+
+        public void FadeInMusic()
+        {
+            if (MusicPlayer.Instance) MusicPlayer.Instance.FadeInWithResume();
+        }
+
+        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
+        static void ResetLast() => _last = null;
     }
 }

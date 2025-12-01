@@ -34,7 +34,9 @@ namespace Expedition0.Audio
         // State
         public MusicTrack CurrentTrack { get; private set; }
         public MusicTrack NextTrack { get; private set; }
-
+        private MusicTrackAsset _currentMusicTrackAsset;
+        public MusicTrackAsset CurrentMusicTrackAsset => _currentMusicTrackAsset;
+        
         public static MusicPlayer Instance;
 
         // Utility
@@ -293,11 +295,13 @@ namespace Expedition0.Audio
 
         public void Play(MusicTrackAsset a)
         {
+            _currentMusicTrackAsset = a;
             Play(a ? new MusicTrack { intro = a.intro, loop = a.loop, volume = a.volume } : null);
         }
 
         public void Reassign(MusicTrackAsset a)
         {
+            _currentMusicTrackAsset = a;
             Reassign(a ? new MusicTrack { intro = a.intro, loop = a.loop, volume = a.volume } : null);
         }
     }
