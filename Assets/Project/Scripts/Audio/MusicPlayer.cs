@@ -18,7 +18,7 @@ namespace Expedition0.Audio
         public AudioSource auxSrc; // plays intro (or the next intro)
 
         [Header("Defaults")] public bool playOnAwake = true;
-        public bool persistAcrossScenes = true;
+        // public bool persistAcrossScenes = true;
         public MusicTrack defaultTrack;
 
         [Tooltip("Scheduling lead time in seconds (DSP). 0.03–0.08 is typical.")]
@@ -34,6 +34,10 @@ namespace Expedition0.Audio
         // State
         public MusicTrack CurrentTrack { get; private set; }
         public MusicTrack NextTrack { get; private set; }
+        private MusicTrackAsset _currentMusicTrackAsset;
+        public MusicTrackAsset CurrentMusicTrackAsset => _currentMusicTrackAsset;
+        
+        public static MusicPlayer Instance;
 
         // Utility
         private static double ClipLen(AudioClip c)
@@ -46,18 +50,14 @@ namespace Expedition0.Audio
 
         private void Awake()
         {
-            if (persistAcrossScenes)
+            if (Instance != null && Instance != this)
             {
-                // Singleton-guard to avoid duplicates across scene loads
-                var existing = FindObjectsByType<MusicPlayer>(FindObjectsSortMode.None);
-                if (existing.Length > 1)
-                {
-                    Destroy(gameObject);
-                    return;
-                }
-
-                DontDestroyOnLoad(gameObject);
+                Destroy(gameObject);
+                return;
             }
+
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
 
             // Safe defaults
             mainSrc.playOnAwake = false;
@@ -295,11 +295,13 @@ namespace Expedition0.Audio
 
         public void Play(MusicTrackAsset a)
         {
+            _currentMusicTrackAsset = a;
             Play(a ? new MusicTrack { intro = a.intro, loop = a.loop, volume = a.volume } : null);
         }
 
         public void Reassign(MusicTrackAsset a)
         {
+            _currentMusicTrackAsset = a;
             Reassign(a ? new MusicTrack { intro = a.intro, loop = a.loop, volume = a.volume } : null);
         }
     }

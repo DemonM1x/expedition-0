@@ -31,5 +31,24 @@ namespace Expedition0.Audio
                 developerDescription = developerDescription.Substring(0, MaxDescLen);
         }
 #endif
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null || GetType() != obj.GetType())
+            {
+                return false;
+            }
+
+            MusicTrackAsset other = (MusicTrackAsset)obj;
+
+            return Equals(EffectiveName, other.EffectiveName);
+        }
+
+        public override int GetHashCode()
+        {
+            int hash = 17;
+            hash = hash * 31 + (EffectiveName?.GetHashCode() ?? 0);
+            return hash;
+        }
     }
 }
