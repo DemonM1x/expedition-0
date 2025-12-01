@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.XR.Interaction.Toolkit;
 using UnityEngine.XR.Interaction.Toolkit.Interactables;
 
@@ -16,6 +17,10 @@ public class BlasterShoot : MonoBehaviour
 
     [Header("Layer Detection")]
     [SerializeField] private LayerMask hitLayers;
+
+    [Header("Events")]
+    [Tooltip("Вызывается в момент выстрела")]
+    public UnityEvent onShoot = new UnityEvent(); 
 
     private XRGrabInteractable grabInteractable;
 
@@ -46,6 +51,9 @@ public class BlasterShoot : MonoBehaviour
             Debug.LogWarning("ShootPoint or BeamMaterial is not assigned!");
             return;
         }
+
+        // Вызываем событие сразу в начале выстрела
+        onShoot?.Invoke();
 
         // Создаём луч
         GameObject beam = new GameObject("Beam");
