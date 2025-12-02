@@ -4,42 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0b9dc62a-62e9-4981-bb24-6578aed24519" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Assets/Project/Scripts/Health/HealthPack.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Project/Scripts/Health/HealthPack.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Project/Scripts/Health/PlayerHealth.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Project/Scripts/Health/PlayerHealthTester.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Project/Scripts/Visuals.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Project/Prefabs/Environment/machine/FireSmall.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Project/Prefabs/Environment/machine/FireSmall.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Project/Prefabs/Items/Artifact Crystal.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Project/Prefabs/Items/Artifact Crystal.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Project/Prefabs/Items/Artifact Disk.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Project/Prefabs/Items/Artifact Disk.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Project/Prefabs/Items/Artifact Retranslator.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Project/Prefabs/Items/Artifact Retranslator.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Project/Prefabs/XR/XR Origin (XR Health).prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Project/Prefabs/XR/XR Origin (XR Health).prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Project/Scenes/Scripts.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Project/Scripts/Blaster.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Project/Scripts/Combat.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Project/Scripts/Blaster/BlasterShoot.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Project/Scripts/Combat/BlasterShoot.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Project/Scripts/Blaster/BlasterShoot.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Project/Scripts/Combat/BlasterShoot.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Project/Scripts/Environment/Artifacts/Artifact.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Project/Scripts/Environment/Artifacts/Artifact.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Project/Scripts/Environment/Fire/Fire.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Project/Scripts/Environment/Fire/Fire.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Project/Scripts/HP.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Project/Scripts/HP/EnemyHealth.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Project/Scripts/Health/EnemyHealth.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Project/Scripts/HP/EnemyHealth.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Project/Scripts/Health/EnemyHealth.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Project/Scripts/HP/HealthPack.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Project/Scripts/HP/HealthPack.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Project/Scripts/HP/Interface.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Project/Scripts/Health/Interface.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Project/Scripts/HP/Interface/IDamageable.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Project/Scripts/Health/Interface/IDamageable.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Project/Scripts/HP/Interface/IDamageable.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Project/Scripts/Health/Interface/IDamageable.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Project/Scripts/HP/PlayerHealth.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Project/Scripts/HP/PlayerHealth.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Project/Scripts/Health/DamageDealer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Project/Scripts/Health/DamageDealer.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Project/Scripts/Health/HealthSystem.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Project/Scripts/Health/HealthSystem.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Project/Scripts/Health/PlayerHealth.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Project/Scripts/Health/HealthSystemTester.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Project/Scripts/Health/HealthSystemTester.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Project/Scripts/Health/PlayerHealthTester.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Project/Scripts/Health/RespawnPoint.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Project/Scripts/Health/RespawnPoint.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Project/Scripts/Health/UI_HealthBar.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Project/Scripts/Health/UI_HealthBar.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Sandbox/BlasterExperiment.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Sandbox/BlasterExperiment.unity" afterDir="false" />
-    </list>
+    <list default="true" id="0b9dc62a-62e9-4981-bb24-6578aed24519" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -122,7 +87,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1764660447800</updated>
-      <workItem from="1764660451015" duration="9990000" />
+      <workItem from="1764660451015" duration="10306000" />
     </task>
     <servers />
   </component>
