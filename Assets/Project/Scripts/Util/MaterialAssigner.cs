@@ -2,7 +2,6 @@ using UnityEngine;
 
 namespace Expedition0.Util
 {
-    [DisallowMultipleComponent]
     public sealed class MaterialAssigner : MonoBehaviour
     {
         [Header("Target shared material (do NOT assign per-instance copies)")]
