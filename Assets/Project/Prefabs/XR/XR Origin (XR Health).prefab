@@ -2070,8 +2070,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c670ad0ee5e8ea542b74905d179f22e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HealthSystem
+  respawnRules:
+  - progressConditions: 1
+    priority: 0
+    sceneName: Lobby_Default
+  defaultRespawnSceneName: Bridge Corridor
   maxHealth: 100
-  currentHealth: 0
+  currentHealth: 100
   healthBar: {fileID: 562238022514981447}
   OnTakeDamage:
     m_PersistentCalls:
@@ -2094,9 +2099,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45678901234567890123456789012345, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HealthSystemTester
-  targetHealth: {fileID: 8039796730547064457}
   testDamageAmount: 25
   testHealAmount: 15
+  targetPlayerHealth: {fileID: 8039796730547064457}
 --- !u!1 &8056530448308322064
 GameObject:
   m_ObjectHideFlags: 0

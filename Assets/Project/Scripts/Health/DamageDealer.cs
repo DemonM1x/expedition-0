@@ -1,54 +1,46 @@
 using UnityEngine;
 
-public class DamageDealer : MonoBehaviour
+namespace Expedition0.Health
 {
-    [Header("Damage Settings")]
-    [SerializeField] private float damageAmount = 10f;
-    [SerializeField] private bool destroyOnDamage = false;
-    [SerializeField] private LayerMask targetLayers = -1;
-    
-    [Header("Visual Effects")]
-    [SerializeField] private GameObject hitEffect;
-    
-    private void OnTriggerEnter(Collider other)
+    public class DamageDealer : MonoBehaviour
     {
-        if (((1 << other.gameObject.layer) & targetLayers) != 0)
+        [Header("Damage Settings")] [SerializeField]
+        private float damageAmount = 10f;
+
+        [SerializeField] private bool destroyOnDamage;
+        [SerializeField] private LayerMask targetLayers = -1;
+
+        [Header("Visual Effects")] [SerializeField]
+        private GameObject hitEffect;
+
+        private void OnCollisionEnter(Collision collision)
         {
-            HealthSystem health = other.GetComponent<HealthSystem>();
-            if (health != null)
+            if (((1 << collision.gameObject.layer) & targetLayers) != 0)
             {
-                health.TakeDamage(damageAmount);
-                
-                if (hitEffect != null)
+                var health = collision.gameObject.GetComponent<PlayerHealth>();
+                if (health != null)
                 {
-                    Instantiate(hitEffect, transform.position, transform.rotation);
-                }
-                
-                if (destroyOnDamage)
-                {
-                    Destroy(gameObject);
+                    health.TakeDamage(damageAmount);
+
+                    if (hitEffect != null) Instantiate(hitEffect, collision.contacts[0].point, Quaternion.identity);
+
+                    if (destroyOnDamage) Destroy(gameObject);
                 }
             }
         }
-    }
-    
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (((1 << collision.gameObject.layer) & targetLayers) != 0)
+
+        private void OnTriggerEnter(Collider other)
         {
-            HealthSystem health = collision.gameObject.GetComponent<HealthSystem>();
-            if (health != null)
+            if (((1 << other.gameObject.layer) & targetLayers) != 0)
             {
-                health.TakeDamage(damageAmount);
-                
-                if (hitEffect != null)
+                var health = other.GetComponent<PlayerHealth>();
+                if (health != null)
                 {
-                    Instantiate(hitEffect, collision.contacts[0].point, Quaternion.identity);
-                }
-                
-                if (destroyOnDamage)
-                {
-                    Destroy(gameObject);
+                    health.TakeDamage(damageAmount);
+
+                    if (hitEffect != null) Instantiate(hitEffect, transform.position, transform.rotation);
+
+                    if (destroyOnDamage) Destroy(gameObject);
                 }
             }
         }

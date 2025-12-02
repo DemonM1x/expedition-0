@@ -1,85 +1,78 @@
 using UnityEngine;
 
-public class RespawnPoint : MonoBehaviour
+namespace Expedition0.Health
 {
-    [Header("Respawn Point Settings")]
-    [SerializeField] private string pointName = "Checkpoint";
-    [SerializeField] private bool isActive = false;
-    
-    [Header("Visuals")]
-    [SerializeField] private GameObject activeVisual;
-    [SerializeField] private GameObject inactiveVisual;
-    
-    [Header("Audio")]
-    [SerializeField] private AudioClip activationSound;
-    
-    private void Start()
+    public class RespawnPoint : MonoBehaviour
     {
-        UpdateVisuals();
-    }
+        [Header("Respawn Point Settings")] [SerializeField]
+        private string pointName = "Checkpoint";
     
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Player"))
+        [SerializeField] private bool isActive;
+    
+        [Header("Visuals")] [SerializeField] private GameObject activeVisual;
+    
+        [SerializeField] private GameObject inactiveVisual;
+    
+        [Header("Audio")] [SerializeField] private AudioClip activationSound;
+    
+        private void Start()
         {
-            HealthSystem healthSystem = other.GetComponent<HealthSystem>();
-            if (healthSystem != null && !isActive)
+            UpdateVisuals();
+        }
+    
+        private void OnDrawGizmos()
+        {
+            Gizmos.color = isActive ? Color.green : Color.gray;
+            Gizmos.DrawWireCube(transform.position, Vector3.one * 2f);
+            Gizmos.DrawIcon(transform.position + Vector3.up * 2f, "RespawnPoint.png", true);
+        }
+    
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.CompareTag("Player"))
             {
-                ActivateRespawnPoint(healthSystem);
+                PlayerHealth playerHealth = other.GetComponent<PlayerHealth>();
+                if (playerHealth != null && !isActive) ActivateRespawnPoint(playerHealth);
             }
         }
-    }
     
-    private void ActivateRespawnPoint(HealthSystem playerHealth)
-    {
-        isActive = true;
-        playerHealth.SetRespawnPoint(transform.position, transform.rotation);
-        
-        DeactivateOtherRespawnPoints();
-        
-
-        UpdateVisuals();
-        
-
-        if (activationSound != null)
+        private void ActivateRespawnPoint(PlayerHealth playerPlayerHealth)
         {
-            AudioSource.PlayClipAtPoint(activationSound, transform.position);
-        }
-        
-        Debug.Log($": {pointName}");
-    }
+            isActive = true;
+            playerPlayerHealth.SetRespawnPoint(transform.position, transform.rotation);
     
-    private void DeactivateOtherRespawnPoints()
-    {
-        RespawnPoint[] allPoints = FindObjectsOfType<RespawnPoint>();
-        foreach (RespawnPoint point in allPoints)
+            DeactivateOtherRespawnPoints();
+    
+    
+            UpdateVisuals();
+    
+    
+            if (activationSound != null) AudioSource.PlayClipAtPoint(activationSound, transform.position);
+    
+            Debug.Log($": {pointName}");
+        }
+    
+        private void DeactivateOtherRespawnPoints()
         {
-            if (point != this)
-            {
-                point.Deactivate();
-            }
+            var allPoints = FindObjectsByType<RespawnPoint>(FindObjectsSortMode.None);
+            foreach (var point in allPoints)
+                if (point != this)
+                    point.Deactivate();
         }
-    }
     
-    public void Deactivate()
-    {
-        isActive = false;
-        UpdateVisuals();
-    }
+        public void Deactivate()
+        {
+            isActive = false;
+            UpdateVisuals();
+        }
     
-    private void UpdateVisuals()
-    {
-        if (activeVisual != null)
-            activeVisual.SetActive(isActive);
-            
-        if (inactiveVisual != null)
-            inactiveVisual.SetActive(!isActive);
-    }
+        private void UpdateVisuals()
+        {
+            if (activeVisual != null)
+                activeVisual.SetActive(isActive);
     
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = isActive ? Color.green : Color.gray;
-        Gizmos.DrawWireCube(transform.position, Vector3.one * 2f);
-        Gizmos.DrawIcon(transform.position + Vector3.up * 2f, "RespawnPoint.png", true);
+            if (inactiveVisual != null)
+                inactiveVisual.SetActive(!isActive);
+        }
     }
 }
