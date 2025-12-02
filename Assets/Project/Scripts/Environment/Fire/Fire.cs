@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Expedition0.Health;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -19,6 +20,7 @@ namespace Expedition0.Environment.Fire
         public float lightRange = 3.5f;
 
         public bool igniteOnStart;
+        public float damage = 5f;
 
         private readonly List<GameObject> _flames = new();
         private readonly List<Light> _lights = new();
@@ -124,6 +126,15 @@ namespace Expedition0.Environment.Fire
                 {
                     Debug.Log("Cannot unregister light, NearestFireLights instance is null");
                 }
+            }
+        }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            Debug.Log("Something entered that fire's collider");
+            if (other.CompareTag("Player") && other.TryGetComponent<IDamageable>(out var damageable))
+            {
+                damageable.TakeDamage(damage);
             }
         }
 

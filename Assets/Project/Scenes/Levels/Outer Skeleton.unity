@@ -197,6 +197,55 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6370666460622469421, guid: 8cb7bce8914b38f469837a72b64b348d, type: 3}
   m_PrefabInstance: {fileID: 28244016}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &55452169
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 55452170}
+  - component: {fileID: 55452171}
+  m_Layer: 0
+  m_Name: Music Changer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &55452170
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 55452169}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -136.91078, y: -3.38096, z: 74.74409}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &55452171
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 55452169}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0b4c774691f435a98597e6b85170ffd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Expedition0.Audio.MusicChanger
+  conditionalTracks:
+  - progressConditions: 2
+    priority: 0
+    trackAsset: {fileID: 11400000, guid: 67bb9d2b07007a449a1526c8868b7221, type: 2}
+  defaultTrack: {fileID: 11400000, guid: d9e5cc6c5bb18964fb5b94bed8321912, type: 2}
 --- !u!1 &58249943
 GameObject:
   m_ObjectHideFlags: 0
@@ -1878,3 +1927,4 @@ SceneRoots:
   - {fileID: 1535268313}
   - {fileID: 58249944}
   - {fileID: 591943900}
+  - {fileID: 55452170}
